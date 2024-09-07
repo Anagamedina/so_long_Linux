@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:18:55 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 15:12:20 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:12:48 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*read_file(char *path, int i)
 	if (i <= 2 && bytes_read == 0)
 	{
 		printf("archivo con 1 linia espacio y nulo\n");
-		handle_exit(ERROR_OPEN_FILE, 32);
+		return (NULL);
 	}
 	close (fd);
 	map1d = allocate_map1d(i);
@@ -105,24 +105,21 @@ static void	check_map_dimensions(t_map *map)
 }
 
 /************************MAIN FUNCTION **************************/
-void	read_map(char *path, t_map *map)
+int	read_map(char *path, t_map *map)
 {
 	char	*map1d;
 
 	map1d = read_file(path, 0);
-	// if (map1d == NULL || map1d[0] == '\0')
 	if (map1d == NULL)
 	{
 		free(map1d);
-		handle_exit(ERROR_INVALID_MAP, 30);
-		return ;
+		return (1);
 	}
 	map->matrix = ft_split(map1d, '\n');
 	free(map1d);
 	if (map->matrix == NULL)
-	{
 		handle_exit(ERROR_MEMORY, 35);
-	}
 	set_map_dimensions(map);
 	check_map_dimensions(map);
+	return (0);
 }

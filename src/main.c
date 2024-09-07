@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:20:29 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 15:15:22 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:09:56 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@ static	int	close_window(t_game *game)
 	free_game(game);
 	exit(0);
 }
+
+void	check_empty(char **argv, t_game *game)
+{
+	if (map_format_border_check(argv[1], game->map) == 1)
+	{
+		free(game->map);
+		free(game);
+		handle_exit(ERROR_OPEN_FILE, 32);
+	}
+
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -33,7 +45,7 @@ int	main(int argc, char **argv)
 		game = init_game();
 		if (game != NULL)
 		{
-			map_format_border_check(argv[1], game->map);
+			check_empty(argv, game);
 			map_items(game->map);
 			validation_player(&ccoins, game->map);
 			init_sprite(game);
@@ -42,11 +54,7 @@ int	main(int argc, char **argv)
 			mlx_loop(game->mlx_ptr);
 		}
 		else
-		{
 			free_game(game);
-
-		}
-		// free_game(game);
 	}
 	return (0);
 }
