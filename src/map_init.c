@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:18:55 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 18:14:06 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/07 20:16:36 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ static int	ft_open_map(char *path)
 
 static char *allocate_map1d(size_t size)
 {
-    char *map1d;
+	char	*map1d;
 
-    map1d = (char *)malloc(size + 1);
-    if (!map1d)
-    {
-        handle_exit(ERROR_MEMORY, 35);
-    }
-    return map1d;
+	map1d = (char *)malloc(size + 1);
+	if (!map1d)
+		handle_exit(ERROR_MEMORY, 35);
+	return (map1d);
 }
 
 static char	*read_file(char *path, int i)
@@ -45,19 +43,22 @@ static char	*read_file(char *path, int i)
 	bytes_read = read(fd, &buffer, 1);
 	if (bytes_read == 0)
 	{
-		ft_printf("archivo vacio\n");
 		close (fd);
-		handle_exit(ERROR_OPEN_FILE, 32);
+		return (NULL);
 	}
 	while (bytes_read > 0 && ++i)
 		bytes_read = read(fd, &buffer, 1);
 	if (i <= 2 && bytes_read == 0)
 	{
-		printf("archivo con 1 linia espacio y nulo\n");
+		close (fd);
 		return (NULL);
 	}
-	close (fd);
 	map1d = allocate_map1d(i);
+	if (!map1d)
+	{
+		close(fd);
+		handle_exit(ERROR_MEMORY_ALLOCATION, 35);
+	}
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
@@ -105,6 +106,7 @@ static void	check_map_dimensions(t_map *map)
 }
 
 /************************MAIN FUNCTION **************************/
+
 int	read_map(char *path, t_map *map)
 {
 	char	*map1d;
@@ -112,7 +114,7 @@ int	read_map(char *path, t_map *map)
 	map1d = read_file(path, 0);
 	if (map1d == NULL)
 	{
-		free(map1d);
+//		free(map1d);
 		return (1);
 	}
 	map->matrix = ft_split(map1d, '\n');

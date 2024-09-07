@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:25:47 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 17:35:32 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/07 19:37:06 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static int	check_first_and_last_line(t_map *map)
 	while (map->matrix[0][j] != '\0')
 	{
 		if (map->matrix[0][j] != '1')
-			handle_error(ERROR_WALLS, 30, map, NULL);
+			return (1);
 		j++;
 	}
 	j = 0;
 	while (map->matrix[map->rows - 1][j] != '\0')
 	{
 		if (map->matrix[map->rows - 1][j] != '1')
-			handle_error(ERROR_WALLS, 30, map, NULL);
+			return (1);
 		j++;
 	}
 	return (0);
@@ -61,16 +61,20 @@ static int	check_laterals_map(t_map *map)
 	i = 0;
 	while (i < map->rows)
 	{
-		if (map->matrix[i][0] != '1'
+		if (map->matrix[i][0] != '1' \
 			|| map->matrix[i][map->cols - 1] != '1')
-			handle_error(ERROR_WALLS, 30, map, NULL);
+		{
+			return (1);
+		}
 		i++;
 	}
 	i = 0;
 	while (i < map->rows)
 	{
 		if (map->matrix[i][map->cols - 1] != '1')
-			handle_error(ERROR_WALLS, 30, map, NULL);
+		{
+			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -78,22 +82,27 @@ static int	check_laterals_map(t_map *map)
 
 /************************VALIDATION MAIN **************************/
 
-int map_format_border_check(char *path, t_map *map)
+int	map_format_border_check(char *path, t_map *map)
 {
 	if (validate_path(path) == 0)
 	{
-		printf("file is valid :)\n");
+		printf("file is valid\n");
 		if (read_map(path, map) == 1)
 		{
 			printf("aliberamos y exit de 1 linia vacia\n");
-//			free(map);
-//			handle_exit(ERROR_OPEN_FILE, 32);
 			return (1);
 		}
-		if (check_first_and_last_line(map) == 0 && check_laterals_map(map) == 0)
-			ft_printf("Walls ok \n");
+		if (check_first_and_last_line(map) == 1 || check_laterals_map(map) == 1)
+		{
+			printf("entramos en error walls para aliberar y exit\n");
+//			free_map2d(map);
+			return (1);
+		}
 	}
 	else
-		handle_exit(ERROR_OPEN_FILE, 32);
+	{
+		printf("mapa correcto entramos\n");
+		return (0);
+	}
 	return (0);
 }

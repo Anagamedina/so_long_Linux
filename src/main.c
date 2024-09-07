@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:20:29 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 18:10:00 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/07 20:33:09 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ void	check_empty(char **argv, t_game *game)
 {
 	if (map_format_border_check(argv[1], game->map) == 1)
 	{
+//		free_map2d(game->map);
 		free(game->map);
 		free(game);
+		ft_printf("entra en check_empty()\n");
 		handle_exit(ERROR_OPEN_FILE, 32);
 	}
-
+	else
+		return ;
 }
 
 
