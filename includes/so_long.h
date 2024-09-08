@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:26:31 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/08 14:34:40 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:53:04 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,15 @@ void	validation_player(int *ccoins, t_map *map);
 void	init_mlx(t_game *game);
 void	check_empty(char **argv, t_game *game);
 int		items_errors(t_map *map);
+int		ft_open_map(char *path);
+void	check_empty(char **argv, t_game *game);
+int		close_window(t_game *game);
 
 /********HANDLE ERROR AND FREE ****/
 void	handle_error(char *str, int size, t_map *map, t_game *game);
 void	handle_exit(char *str, int size);
 void	free_game(t_game *game);
 void	free_map2d(t_map *map);
-
-void	free_game_main(t_game *game);
 
 /********SPRITES****/
 void	new_image(t_game *game, void **image, char *path);

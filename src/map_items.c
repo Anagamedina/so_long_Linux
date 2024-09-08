@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:58:48 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/08 14:46:42 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:25:27 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ void	map_items(t_map *map)
 /************************VALIDATION MAIN **************************/
 int	items_errors(t_map *map)
 {
+	if (check_items(map) == 1)
+	{
+		printf("entramos en map_items() if (check_items)\n");
+		return (1);
+	}
 	map_items(map);
 	if (map->coins < 1 || map->exit != 1 || map->player != 1)
 	{
 		printf("error de mas de un items\n");
-		return (1);
-	}
-	if (check_items(map) == 1)
-	{
-		printf("entramos en map_items() if (check_items)\n");
 		return (1);
 	}
 	return (0);

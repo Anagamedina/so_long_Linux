@@ -6,33 +6,11 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:22:06 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/08 14:23:27 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:42:13 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-/*void	free_map2d(t_map *map)
-{
-	int	i;
-
-	if (map == NULL)
-		return ;
-	if (map->matrix != NULL)
-	{
-		i = 0;
-		while (i < map->rows)
-		{
-			if (map->matrix[i] != NULL)
-			{
-				free(map->matrix[i]);
-			}
-			i++;
-		}
-		free(map->matrix);
-	}
-}
-*/
 
 void	free_map2d(t_map *map)
 {
@@ -50,7 +28,6 @@ void	free_map2d(t_map *map)
 			}
 			free(map->matrix);
 		}
-//		free(map);
 	}
 }
 
@@ -81,4 +58,24 @@ void	free_game(t_game *game)
 			free_map2d(game->map);
 		free(game);
 	}
+}
+
+void	check_empty(char **argv, t_game *game)
+{
+	if (map_format_border_check(argv[1], game->map) == 1)
+	{
+		free_map2d(game->map);
+		free(game->map);
+		free(game);
+		handle_exit(ERROR_INVALID_MAP, 23);
+	}
+	else if (items_errors(game->map) == 1)
+	{
+		free_map2d(game->map);
+		free(game->map);
+		free(game);
+		handle_exit(ERROR_ITEMS, 32);
+	}
+	else
+		return ;
 }

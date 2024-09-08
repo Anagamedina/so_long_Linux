@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:25:47 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 19:37:06 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:45:05 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,12 @@ int	map_format_border_check(char *path, t_map *map)
 {
 	if (validate_path(path) == 0)
 	{
-		printf("file is valid\n");
 		if (read_map(path, map) == 1)
-		{
-			printf("aliberamos y exit de 1 linia vacia\n");
 			return (1);
-		}
 		if (check_first_and_last_line(map) == 1 || check_laterals_map(map) == 1)
-		{
-			printf("entramos en error walls para aliberar y exit\n");
-//			free_map2d(map);
 			return (1);
-		}
 	}
 	else
-	{
-		printf("mapa correcto entramos\n");
 		return (0);
-	}
 	return (0);
 }

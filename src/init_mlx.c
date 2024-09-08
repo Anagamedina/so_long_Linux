@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:21:53 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/05 20:21:57 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:54:37 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_mlx(t_game *game)
 		exit (1);
 	}
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map->cols * TILE_SIZE, \
-		game->map->rows * TILE_SIZE, "Hello Ana! so_long");
+		game->map->rows * TILE_SIZE, "Welcome so_long's Ana");
 	if (game->win_ptr == NULL)
 	{
 		ft_printf("Error creating window.\n");

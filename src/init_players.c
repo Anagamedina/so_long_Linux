@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:58:12 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/06 17:58:16 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:29:12 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,25 +79,25 @@ static void	copy_map_matrix(t_map *copy_map, t_map *map)
 	}
 }
 
-static	int	check_remaining_coins(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < map->rows)
-	{
-		y = 0;
-		while (y < map->cols)
-		{
-			if (map->matrix[x][y] == '0')
-				return (1);
-			y++;
-		}
-		x++;
-	}
-	return (0);
-}
+//static	int	check_remaining_coins(t_map *map)
+//{
+//	int	x;
+//	int	y;
+//
+//	x = 0;
+//	while (x < map->rows)
+//	{
+//		y = 0;
+//		while (y < map->cols)
+//		{
+//			if (map->matrix[x][y] == '0')
+//				return (1);
+//			y++;
+//		}
+//		x++;
+//	}
+//	return (0);
+//}
 
 /************************VALIDATION MAIN **************************/
 void	validation_player(int *ccoins, t_map *map)
@@ -109,11 +109,11 @@ void	validation_player(int *ccoins, t_map *map)
 	players_init_pos(map);
 	copy_map_matrix(&copy_map, map);
 	flood_fill(&copy_map, map->player_pos.x, map->player_pos.y, ccoins);
-	if (check_remaining_coins(&copy_map))
-	{
-		free_map2d(&copy_map);
-		handle_error(ERROR_INVALID_MAP, 30, map, NULL);
-	}
+//	if (check_remaining_coins(&copy_map))
+//	{
+//		free_map2d(&copy_map);
+//		handle_error(ERROR_INVALID_MAP, 30, map, NULL);
+//	}
 	if (*ccoins == map->coins
 		|| map->matrix[map->exit_pos.x][map->exit_pos.y] == 'V')
 	{

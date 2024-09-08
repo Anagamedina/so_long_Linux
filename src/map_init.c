@@ -6,21 +6,11 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:18:55 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 20:16:36 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:49:51 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-static int	ft_open_map(char *path)
-{
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		handle_exit(ERROR_OPEN_FILE, 32);
-	return (fd);
-}
 
 static char *allocate_map1d(size_t size)
 {
@@ -113,10 +103,7 @@ int	read_map(char *path, t_map *map)
 
 	map1d = read_file(path, 0);
 	if (map1d == NULL)
-	{
-//		free(map1d);
 		return (1);
-	}
 	map->matrix = ft_split(map1d, '\n');
 	free(map1d);
 	if (map->matrix == NULL)
