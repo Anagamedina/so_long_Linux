@@ -6,25 +6,25 @@
 /*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:58:48 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/07 20:19:07 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:46:42 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static void	validations_items(t_map *copy_map)
-{
-	ft_printf("Players: %d\n", copy_map->player);
-	ft_printf("Coins: %d\n", copy_map->coins);
-	ft_printf("Exit: %d\n", copy_map->exit);
-	if (copy_map->coins < 1 \
-		|| copy_map->exit != 1 || copy_map->player != 1)
-		handle_error(ERROR_ITEMS, 20, copy_map, NULL);
-	else
-	{
-		ft_printf("Items ok\n");
-	}
-}
+//static void	validations_items(t_map *copy_map)
+//{
+//	ft_printf("Players: %d\n", copy_map->player);
+//	ft_printf("Coins: %d\n", copy_map->coins);
+//	ft_printf("Exit: %d\n", copy_map->exit);
+//	if (copy_map->coins < 1
+//		|| copy_map->exit != 1 || copy_map->player != 1)
+//		handle_error(ERROR_ITEMS, 20, copy_map, NULL);
+//	else
+//	{
+//		ft_printf("Items ok\n");
+//	}
+//}
 
 static	int	check_items(t_map *map)
 {
@@ -50,12 +50,11 @@ static	int	check_items(t_map *map)
 	return (0);
 }
 
-/************************VALIDATION MAIN **************************/
 
 void	map_items(t_map *map)
 {
-	int	j;
 	int	i;
+	int	j;
 
 	i = 1;
 	while (i < map->rows - 1)
@@ -73,12 +72,21 @@ void	map_items(t_map *map)
 		}
 		i++;
 	}
+}
+
+/************************VALIDATION MAIN **************************/
+int	items_errors(t_map *map)
+{
+	map_items(map);
+	if (map->coins < 1 || map->exit != 1 || map->player != 1)
+	{
+		printf("error de mas de un items\n");
+		return (1);
+	}
 	if (check_items(map) == 1)
 	{
 		printf("entramos en map_items() if (check_items)\n");
-		free_map2d(map);
-//		handle_error(ERROR_ITEMS, 20, map, NULL);
+		return (1);
 	}
-	else
-		validations_items (map);
+	return (0);
 }
