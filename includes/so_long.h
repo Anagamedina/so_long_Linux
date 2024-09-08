@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:26:31 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/08 18:53:04 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/08 20:07:08 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		items_errors(t_map *map);
 int		ft_open_map(char *path);
 void	check_empty(char **argv, t_game *game);
 int		close_window(t_game *game);
+void	flood_check_exit(t_map *map, int x, int y, int *flag);
 
 /********HANDLE ERROR AND FREE ****/
 void	handle_error(char *str, int size, t_map *map, t_game *game);
