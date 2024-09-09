@@ -1,17 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_players.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/06 17:58:12 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:08:51 by anamedin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../includes/so_long.h"
-
 static void players_init_pos(t_map *map)
 {
 	int y;
@@ -54,6 +40,25 @@ void flood_fill(t_map *map, int x, int y, int *ccoins)
 	flood_fill(map, x, y - 1, ccoins);
 }
 
+static int check_exit_accessible(t_map *map)
+{
+    int x = map->exit_pos.x;
+    int y = map->exit_pos.y;
+
+    if (x < 0 || y < 0 || y >= map->cols || x >= map->rows)
+        return (1);
+
+    // Verifica si alguna de las celdas adyacentes a la salida es 'V'
+    if (map->matrix[x + 1][y] == 'V' ||
+        map->matrix[x - 1][y] == 'V' ||
+        map->matrix[x][y + 1] == 'V' ||
+        map->matrix[x][y - 1] == 'V')
+    {
+        return (0); // Exit is accessible
+    }
+    return (1); // Exit is not accessible
+}
+
 static void flood_exit(t_map *map, int x, int y)
 {
 	if (x < 0 || y < 0 || y >= map->cols || x >= map->rows)
@@ -65,6 +70,26 @@ static void flood_exit(t_map *map, int x, int y)
 	flood_exit(map, x - 1, y);
 	flood_exit(map, x, y + 1);
 	flood_exit(map, x, y - 1);
+}
+
+void print_map(t_map *map)
+{
+	int y;
+	int x;
+
+	y = 0;
+	while (y < map->rows)
+	{
+		x = 0;
+		while (x < map->cols)
+		{
+			ft_putchar(map->matrix[y][x]);
+			x++;
+		}
+		ft_putchar('\n');
+		y++;
+	}
+	ft_putchar('\n');
 }
 
 static void copy_map_matrix(t_map *copy_map, t_map *map)
@@ -96,7 +121,10 @@ void validation_player(int *ccoins, t_map *map)
 	t_map copy_map;
 	t_map copy_map2;
 
+	// Inicializa posiciones del jugador y salida
 	players_init_pos(map);
+
+	// Copia el mapa para validar el camino del jugador
 	copy_map.rows = map->rows;
 	copy_map.cols = map->cols;
 	copy_map2.rows = map->rows;
@@ -105,20 +133,27 @@ void validation_player(int *ccoins, t_map *map)
 	copy_map_matrix(&copy_map, map);
 	copy_map_matrix(&copy_map2, map);
 
+	// Ejecuta flood fill para el jugador
 	flood_fill(&copy_map, map->player_pos.x, map->player_pos.y, ccoins);
+	print_map(&copy_map);
+
+	// Ejecuta flood fill para la salida
+	flood_exit(&copy_map2, map->exit_pos.x, map->exit_pos.y);
+	print_map(&copy_map2);
 
 	ft_printf("coins total en MAP: %d\n", map->coins);
 	ft_printf("coins POINTER: %d\n", *ccoins);
-	flood_exit(&copy_map2, map->player_pos.x, map->player_pos.y);
-	if (*ccoins == map->coins && (copy_map2.matrix[map->exit_pos.x][map->exit_pos.y] == 'V'))
+
+	// Verifica si el jugador recogió todas las monedas y si la salida es accesible
+	if (*ccoins == map->coins && check_exit_accessible(&copy_map2) == 0)
 	    ft_printf("¡CCOINS Ok y Exit Ok!\n");
 	else
 	{
-		printf("error flood exit\n");
 	    free_map2d(&copy_map);
 	    free_map2d(&copy_map2);
 	    handle_error(ERROR_COINS_EXIT, 20, map, NULL);
 	}
+
 	free_map2d(&copy_map);
 	free_map2d(&copy_map2);
 }

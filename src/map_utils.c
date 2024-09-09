@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anamedin <anamedin@student.42barcelona.c>  +#+  +:+       +#+        */
+/*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:49:47 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/08 19:13:50 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:45:25 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,6 @@ int	ft_open_map(char *path)
 	return (fd);
 }
 
-/*
-void	aux_read_file(int fd)
-{
-	close(fd);
-	return (NULL);
-}
-*/
-
-
-
-
 int	close_window(t_game *game)
 {
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
@@ -40,3 +29,34 @@ int	close_window(t_game *game)
 	exit(0);
 }
 
+int	set_map_dimensions(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->matrix[i] != NULL)
+		i++;
+	map->rows = i;
+	ft_printf("===========ROWS: %d\n", map->rows);
+	if (map->matrix[0] == NULL)
+		return (1);
+	map->cols = (int)ft_strlen(map->matrix[0]);
+	//itera cadad linea y si la longitud de la 1ra linea no es correcta
+	return (0);
+}
+
+int	check_map_dimensions(t_map *map)
+{
+	int	i;
+	int	line;
+
+	i = 0;
+	while (map->matrix[i] != NULL)
+	{
+		line = (int)ft_strlen(map->matrix[i]);
+		if (map->cols != line)
+			return (1);
+		i++;
+	}
+	return (0);
+}

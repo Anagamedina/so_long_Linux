@@ -6,25 +6,11 @@
 /*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:58:48 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/08 18:25:27 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 09:11:09 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-//static void	validations_items(t_map *copy_map)
-//{
-//	ft_printf("Players: %d\n", copy_map->player);
-//	ft_printf("Coins: %d\n", copy_map->coins);
-//	ft_printf("Exit: %d\n", copy_map->exit);
-//	if (copy_map->coins < 1
-//		|| copy_map->exit != 1 || copy_map->player != 1)
-//		handle_error(ERROR_ITEMS, 20, copy_map, NULL);
-//	else
-//	{
-//		ft_printf("Items ok\n");
-//	}
-//}
 
 static	int	check_items(t_map *map)
 {
@@ -49,7 +35,6 @@ static	int	check_items(t_map *map)
 	}
 	return (0);
 }
-
 
 void	map_items(t_map *map)
 {
