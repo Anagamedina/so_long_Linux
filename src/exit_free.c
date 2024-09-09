@@ -6,11 +6,30 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:22:21 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/05 20:53:16 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:27:02 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	free_map2d(t_map *map)
+{
+	int	i;
+
+	if (map != NULL)
+	{
+		if (map->matrix != NULL)
+		{
+			i = 0;
+			while (i < map->rows && map->matrix[i] != NULL)
+			{
+				free(map->matrix[i]);
+				i++;
+			}
+			free(map->matrix);
+		}
+	}
+}
 
 void	free_images(t_game *game)
 {

@@ -6,30 +6,13 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:22:06 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:18:46 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:31:18 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	free_map2d(t_map *map)
-{
-	int	i;
 
-	if (map != NULL)
-	{
-		if (map->matrix != NULL)
-		{
-			i = 0;
-			while (i < map->rows && map->matrix[i] != NULL)
-			{
-				free(map->matrix[i]);
-				i++;
-			}
-			free(map->matrix);
-		}
-	}
-}
 
 void	handle_error(char *str, int size, t_map *map, t_game *game)
 {
@@ -60,11 +43,8 @@ void	free_game(t_game *game)
 	}
 }
 
-void	check_empty(char **argv, t_game *game)
+void	check_empty(char **argv, t_game *game, int ccoins)
 {
-	int	ccoins;
-
-	ccoins = 0;
 	if (map_format_border_check(argv[1], game->map) == 1)
 	{
 		free_map2d(game->map);
@@ -79,7 +59,7 @@ void	check_empty(char **argv, t_game *game)
 		free(game);
 		handle_exit(ERROR_ITEMS, 32);
 	}
-	else if(validation_player(&ccoins, game->map) == 1)
+	else if (validation_player(&ccoins, game->map) == 1)
 	{
 		free_map2d(game->map);
 		free(game->map);

@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:20:29 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:18:36 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:32:55 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 int	main(int argc, char **argv)
 {
 	t_game	*game;
-	// int		ccoins;
 
 	game = NULL;
-	// ccoins = 0;
 	if (argc != 2)
 		handle_exit(ERROR_INVALID_ARG, 26);
 	else
@@ -26,8 +24,7 @@ int	main(int argc, char **argv)
 		game = init_game();
 		if (game != NULL)
 		{
-			check_empty(argv, game);
-			// validation_player(&ccoins, game->map)
+			check_empty(argv, game, 0);
 			init_sprite(game);
 			mlx_key_hook(game->win_ptr, handle_input, game);
 			mlx_hook(game->win_ptr, 17, 0, close_window, game);
