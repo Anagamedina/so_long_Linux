@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:21:53 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/08 18:54:37 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:48:26 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_mlx(t_game *game)
 	game->mlx_ptr = mlx_init();
 	if (game->mlx_ptr == NULL)
 	{
-		ft_printf("Error initializing mlx.\n");
 		free(game->mlx_ptr);
 		exit (1);
 	}
@@ -25,7 +24,6 @@ void	init_mlx(t_game *game)
 		game->map->rows * TILE_SIZE, "Welcome so_long's Ana");
 	if (game->win_ptr == NULL)
 	{
-		ft_printf("Error creating window.\n");
 		mlx_destroy_display(game->mlx_ptr);
 		free(game->mlx_ptr);
 		exit(1);
@@ -40,7 +38,6 @@ void	new_image(t_game *game, void **image, char *path)
 	*image = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
 	if (*image == NULL)
 	{
-		ft_printf("Error: Couldn't find a sprite at path: %s\n", path);
 		exit (1);
 	}
 }

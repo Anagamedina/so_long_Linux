@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:26:31 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:32:47 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:41:54 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include <strings.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include "macros.h"

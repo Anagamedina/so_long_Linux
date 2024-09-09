@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:19:40 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 14:44:32 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:47:37 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	handle_coin_pickup(t_game *game, int new_x, int new_y)
 	if (game->map->matrix[new_x][new_y] == COINS)
 	{
 		game->map->coins--;
+		ft_printf("coins: %d\n", game->map->coins);
 	}
 }
 

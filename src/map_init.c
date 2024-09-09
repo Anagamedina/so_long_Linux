@@ -6,36 +6,34 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:18:55 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 12:48:22 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:49:19 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static char *allocate_map1d(size_t size)
+static	char	*allocate_map1d(size_t size)
 {
-    char *map1d;
+	char	*map1d;
 
-    map1d = (char *)malloc(size + 1);
-    if (!map1d)
-    {
-        handle_exit(ERROR_MEMORY, 35);
-    }
-    return map1d;
+	map1d = (char *)malloc(size + 1);
+	if (!map1d)
+		handle_exit(ERROR_MEMORY, 35);
+	return (map1d);
 }
 
-static int count_file_size(char *path)
+static	int	count_file_size(char *path)
 {
 	int		fd;
 	ssize_t	bytes_read;
 	char	buffer;
-	int		size = 0;
+	int		size;
 
+	size = 0;
 	fd = ft_open_map(path);
 	bytes_read = read(fd, &buffer, 1);
 	if (bytes_read == 0)
 	{
-		ft_printf("archivo vacio\n");
 		close(fd);
 		return (1);
 	}
@@ -45,10 +43,10 @@ static int count_file_size(char *path)
 		size++;
 	}
 	close(fd);
-	return size;
+	return (size);
 }
 
-static char *read_file_content(char *path, int size)
+static	char	*read_file_content(char *path, int size)
 {
 	int		fd;
 	char	*map1d;
@@ -70,7 +68,7 @@ static char *read_file_content(char *path, int size)
 	}
 	map1d[size] = '\0';
 	close(fd);
-	return map1d;
+	return (map1d);
 }
 
 /************************MAP EXTENSION FUNCTION **************************/
@@ -82,23 +80,14 @@ int	read_map(char *path, t_map *map)
 
 	file_size = count_file_size(path);
 	if (file_size <= 2)
-	{
-		printf("archivo con 1 linia espacio y nulo\n");
 		return (1);
-	}
-
 	map1d = read_file_content(path, file_size);
 	if (map1d == NULL)
-	{
 		return (1);
-	}
 	map->matrix = ft_split(map1d, '\n');
 	free(map1d);
 	if (map->matrix == NULL)
-	{
 		handle_exit(ERROR_MEMORY, 35);
-	}
-	// if (set_map_dimensions(map) == 1 && check_map_dimensions(map) == 1)
 	if (set_map_dimensions(map) == 1 || check_map_dimensions(map) == 1)
 		return (1);
 	return (0);

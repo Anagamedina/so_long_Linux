@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:49:47 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 12:45:25 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:47:01 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ int	set_map_dimensions(t_map *map)
 	while (map->matrix[i] != NULL)
 		i++;
 	map->rows = i;
-	ft_printf("===========ROWS: %d\n", map->rows);
 	if (map->matrix[0] == NULL)
 		return (1);
 	map->cols = (int)ft_strlen(map->matrix[0]);
-	//itera cadad linea y si la longitud de la 1ra linea no es correcta
 	return (0);
 }
 

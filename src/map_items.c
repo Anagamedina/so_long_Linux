@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_items.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anamedin <anamedin@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:58:48 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 09:11:09 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 14:43:58 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,9 @@ void	map_items(t_map *map)
 int	items_errors(t_map *map)
 {
 	if (check_items(map) == 1)
-	{
-		printf("entramos en map_items() if (check_items)\n");
 		return (1);
-	}
 	map_items(map);
 	if (map->coins < 1 || map->exit != 1 || map->player != 1)
-	{
-		printf("error de mas de un items\n");
 		return (1);
-	}
 	return (0);
 }
