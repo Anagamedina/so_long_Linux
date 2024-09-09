@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 20:22:06 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 09:09:29 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:18:46 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	free_game(t_game *game)
 
 void	check_empty(char **argv, t_game *game)
 {
+	int	ccoins;
+
+	ccoins = 0;
 	if (map_format_border_check(argv[1], game->map) == 1)
 	{
 		free_map2d(game->map);
@@ -70,6 +73,13 @@ void	check_empty(char **argv, t_game *game)
 		handle_exit(ERROR_INVALID_MAP, 23);
 	}
 	else if (items_errors(game->map) == 1)
+	{
+		free_map2d(game->map);
+		free(game->map);
+		free(game);
+		handle_exit(ERROR_ITEMS, 32);
+	}
+	else if(validation_player(&ccoins, game->map) == 1)
 	{
 		free_map2d(game->map);
 		free(game->map);

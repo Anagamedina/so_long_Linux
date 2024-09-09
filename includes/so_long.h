@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 16:26:31 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 10:01:13 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:12:22 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		map_format_border_check(char *path, t_map *map);
 void	map_items(t_map *map);
 int		read_map(char *path, t_map *map);
 // void	read_map(char *path, t_map *map);
-void	validation_player(int *ccoins, t_map *map);
+int		validation_player(int *ccoins, t_map *map);
 void	init_mlx(t_game *game);
 void	check_empty(char **argv, t_game *game);
 int		items_errors(t_map *map);

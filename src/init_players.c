@@ -6,7 +6,7 @@
 /*   By: anamedin <anamedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:58:12 by anamedin          #+#    #+#             */
-/*   Updated: 2024/09/09 13:08:51 by anamedin         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:11:18 by anamedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void flood_exit(t_map *map, int x, int y)
 		return;
 	if (map->matrix[x][y] == '1' || map->matrix[x][y] == 'V')
 		return;
-	map->matrix[x][y] = 'V'; // Marca la celda como visitada
+	map->matrix[x][y] = 'V';
 	flood_exit(map, x + 1, y);
 	flood_exit(map, x - 1, y);
 	flood_exit(map, x, y + 1);
@@ -91,7 +91,7 @@ static void copy_map_matrix(t_map *copy_map, t_map *map)
 	}
 }
 
-void validation_player(int *ccoins, t_map *map)
+int validation_player(int *ccoins, t_map *map)
 {
 	t_map copy_map;
 	t_map copy_map2;
@@ -117,8 +117,10 @@ void validation_player(int *ccoins, t_map *map)
 		printf("error flood exit\n");
 	    free_map2d(&copy_map);
 	    free_map2d(&copy_map2);
-	    handle_error(ERROR_COINS_EXIT, 20, map, NULL);
+		return (1);
+	    // handle_error(ERROR_COINS_EXIT, 20, map, NULL);
 	}
 	free_map2d(&copy_map);
 	free_map2d(&copy_map2);
+	return (0);
 }
